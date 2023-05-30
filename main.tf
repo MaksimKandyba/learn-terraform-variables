@@ -38,6 +38,13 @@ resource "fly_ip" "exampleIpv6" {
   #depends_on = [fly_app.exampleApp]
 }
 
+resource "fly_volume" "exampleVolume" {
+  name   = "kandyba_volume"
+  app    = "kandyba-flyiac"
+  size   = 1
+  region = var.fly_region
+}
+
 resource "fly_machine" "web" {
   app    = "kandyba-flyiac"
   region = var.fly_region
@@ -57,9 +64,16 @@ resource "fly_machine" "web" {
       ]
       "protocol" : "tcp",
       "internal_port" : 80
-    },
+    }
   ]
-  cpus     = 1
-  memorymb = 256
-  #depends_on = [fly_app.exampleApp]
+  cpus       = 1
+  memorymb   = 256
+  depends_on = [fly_volume.exampleVolume]
+  mounts = [
+    {
+      path      = "/data"
+      volume    = fly_volume.exampleVolume.id
+      encrypted = var.encrypt_volume
+    }
+  ]
 }

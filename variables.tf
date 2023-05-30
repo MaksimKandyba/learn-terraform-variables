@@ -9,3 +9,9 @@ variable "external_port" {
   type        = number
   default     = 80
 }
+
+variable "encrypt_volume" {
+  description = "Encrypt volume at rest"
+  type        = bool
+  default     = true
+}
