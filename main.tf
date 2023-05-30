@@ -40,7 +40,7 @@ resource "fly_ip" "exampleIpv6" {
 
 resource "fly_machine" "web" {
   app    = "kandyba-flyiac"
-  region = "ams"
+  region = var.fly_region
   name   = random_pet.name.id
   image  = "registry.fly.io/kandyba-flyiac"
   services = [
@@ -51,7 +51,7 @@ resource "fly_machine" "web" {
           handlers = ["tls", "http"]
         },
         {
-          port     = 80
+          port     = var.external_port
           handlers = ["http"]
         }
       ]
