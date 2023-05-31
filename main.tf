@@ -68,7 +68,7 @@ resource "fly_machine" "web" {
   ]
   cpus       = 1
   memorymb   = 256
-  depends_on = [fly_volume.exampleVolume]
+  depends_on = [null_resource.unmount_volume_in_background]
   mounts = [
     {
       path      = "/data"
@@ -76,4 +76,13 @@ resource "fly_machine" "web" {
       encrypted = var.encrypt_volume
     }
   ]
+}
+
+resource "null_resource" "unmount_volume_in_background" {
+  depends_on = [fly_volume.exampleVolume]
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "sleep 60"
+  }
 }
