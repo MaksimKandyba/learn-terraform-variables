@@ -15,3 +15,22 @@ variable "encrypt_volume" {
   type        = bool
   default     = true
 }
+
+variable "word_count" {
+  description = "How many words to echo"
+  type        = number
+  default     = 6
+}
+
+variable "phrase" {
+  description = "Phrase to echo"
+  type        = list(string)
+  default = [
+    "To",
+    "be,",
+    "or",
+    "not",
+    "to",
+    "be"
+  ]
+}

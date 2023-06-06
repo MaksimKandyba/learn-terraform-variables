@@ -71,10 +71,22 @@ resource "fly_machine" "web" {
   depends_on = [null_resource.unmount_volume_in_background]
   mounts = [
     {
-      path      = "/data"
+      path      = "/var/www/html/data"
       volume    = fly_volume.exampleVolume.id
       encrypted = var.encrypt_volume
     }
+  ]
+  cmd = [
+    "/bin/bash",
+    "-c",
+    join(
+      " ",
+      concat(
+        ["service httpd start && chkconfig httpd on && echo"],
+        slice(var.phrase, 0, var.word_count),
+        ["> /var/www/html/data/tobe.html"]
+      )
+    )
   ]
 }
 
