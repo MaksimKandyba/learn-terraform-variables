@@ -16,6 +16,10 @@ variable "encrypt_volume" {
   default     = true
 }
 
+variable "volume_name" {
+  type = string
+}
+
 variable "word_count" {
   description = "How many words to echo"
   type        = number

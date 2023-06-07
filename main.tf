@@ -39,7 +39,7 @@ resource "fly_ip" "exampleIpv6" {
 }
 
 resource "fly_volume" "exampleVolume" {
-  name   = "kandyba_volume"
+  name   = var.volume_name
   app    = "kandyba-flyiac"
   size   = 1
   region = var.fly_region
