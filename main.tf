@@ -76,6 +76,7 @@ resource "fly_machine" "web" {
       encrypted = var.encrypt_volume
     }
   ]
+  env = var.env_vars
   cmd = [
     "/bin/bash",
     "-c",
@@ -84,7 +85,7 @@ resource "fly_machine" "web" {
       concat(
         ["service httpd start && chkconfig httpd on && echo"],
         slice(var.phrase, 0, var.word_count),
-        ["> /var/www/html/data/tobe.html"]
+        ["> /var/www/html/data/tobe.$EXT"]
       )
     )
   ]

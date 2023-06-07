@@ -34,3 +34,11 @@ variable "phrase" {
     "be"
   ]
 }
+
+variable "env_vars" {
+  description = "Environment variables"
+  type        = map(string)
+  default = {
+    EXT = "html"
+  }
+}
