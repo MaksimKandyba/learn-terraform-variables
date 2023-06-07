@@ -85,7 +85,8 @@ resource "fly_machine" "web" {
       concat(
         ["service httpd start && chkconfig httpd on && echo"],
         slice(var.phrase, 0, var.word_count),
-        ["> /var/www/html/data/tobe.$EXT"]
+        ["> /var/www/html/data/tobe.$EXT"],
+        ["&& chmod 2775 /var/www/html/data"]
       )
     )
   ]
