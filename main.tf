@@ -78,7 +78,7 @@ resource "fly_machine" "web" {
   ]
   env = var.env_vars
   cmd = [
-    "/bin/bash",
+    "/bin/${var.interpreter}",
     "-c",
     join(
       " ",

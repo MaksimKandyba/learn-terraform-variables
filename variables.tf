@@ -46,3 +46,9 @@ variable "env_vars" {
     EXT = "html"
   }
 }
+
+variable "interpreter" {
+  description = "Command interpreter"
+  type        = string
+  default     = "bash"
+}
