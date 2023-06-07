@@ -18,6 +18,11 @@ variable "encrypt_volume" {
 
 variable "volume_name" {
   type = string
+
+  validation {
+    condition     = length(regexall("-", var.volume_name)) == 0
+    error_message = "Volume name must not contain hyphens."
+  }
 }
 
 variable "word_count" {
